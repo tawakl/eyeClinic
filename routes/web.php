@@ -24,6 +24,8 @@ Route::group(
             function () {
                 require base_path('app/Modules/Dashboard/Admin/Routes/web.php');
                 require base_path('app/Modules/Users/Admin/Routes/web.php');
+                require base_path('app/Modules/Gallery/Admin/Routes/web.php');
+
 //                require base_path('app/Modules/Contact/Admin/Routes/web.php');
 
             }

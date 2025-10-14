@@ -1,6 +1,7 @@
 
 services:
     php:
+        container_name: eye_clinic
         build:
             context: .
             dockerfile: Dockerfile

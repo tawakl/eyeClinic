@@ -30,6 +30,15 @@
                     <span class="nav-link-text ms-1">{{ trans('navigation.users') }}</span>
                 </a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link {{getActiveElementByRoute(route:'admin.gallery.index')}}"
+                   href="{{ route('admin.gallery.index') }}">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-users text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">{{ trans('navigation.gallery') }}</span>
+                </a>
+            </li>
 
 {{--            <li class="nav-item ">--}}
 {{--                <a class="nav-link {{getActiveElementByRoute(route:'admin.contact.get.index')}}"--}}

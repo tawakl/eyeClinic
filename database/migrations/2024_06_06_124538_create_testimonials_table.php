@@ -22,12 +22,6 @@ class CreateTestimonialsTable extends Migration
             $table->text('review')->nullable();
             $table->string('image')->nullable();
             $table->boolean('status')->default(false);
-            $table->unsignedBigInteger('rating_id')->nullable();
-
-            $table->foreign('rating_id')
-                ->references('id')
-                ->on('ratings')
-                ->onDelete('set null');
             $table->timestamps();
         });
     }

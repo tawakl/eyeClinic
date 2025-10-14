@@ -6,31 +6,36 @@
 @push('css')
     <link rel="stylesheet" type="text/css" href="/assets/css/select2.min.css">
 @endpush
-@section('title',@$page_title)
+
+@section('title', @$page_title)
 
 @section('content')
     <div class="row">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">{{ trans('promo_codes.create_promo_code') }}</h5>
+                <h5 class="mb-0">{{ trans('gallery.edit_image') }}</h5>
             </div>
             <div class="card-body">
                 <div class="col-md-12 col-sm-12 col-xs-12 x_panel">
-                    {{ Form::model($row,['method' => 'put','class'=>'form-vertical form-label-left']) }}
-                    <div class="row">
-                        @include('admin.promo_code.form')
-                        <div class="form-group">
-                            <div class="form-layout-footer">
-                                <button type="submit" class="btn btn-success"> {{ trans('app.Save') }}</button>
+                    <form method="POST" action="{{ route('admin.gallery.update', $row->id) }}" class="form-vertical form-label-left" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            @include('admin.gallery.form')
+
+                            <div class="form-group">
+                                <div class="form-layout-footer">
+                                    <button type="submit" class="btn btn-success">{{ trans('app.Save') }}</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {{ Form::close() }}
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
 @push('js')
     <script src="/assets/js/select2.full.min.js"></script>
     <script src="/assets/js/form-select2.min.js"></script>
