@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types = 1);
+
+return [
+    'testimonials_List' => 'قائمة الاراء',
+    'testimonials' => 'الاراء',
+    'name' => 'الاسم',
+    'job' => 'الوظيفة',
+    'review' => 'التقييم',
+    'status' => 'الحالة',
+    'actions' => 'الإجراءات',
+    'image' => ' الصورة',
+    'Testimonial status updated successfully' => 'تم تحديث حالة الرأي بنجاح',
+    'Deactivate another review to activate this one.' => 'قم بإلغاء تنشيط رأي آخر حتى تتمكن من تنشيط هذا الرأي.',
+    'List Testimonials' => 'قائمة الاراء',
+    'change_status' => 'تغيير الحاله',
+    'edit_testimonial' => 'تعديل الرأي',
+    'create_testimonial' => 'إنشاء رأي',
+    'is_active' => 'نشط',
+    'image dimensions' => 'اختر صوره بابعاد 400 * 400 ',
+    'No Testimonials Available' => 'لا توجد اراء متاحة',
+    'listRating' => 'قائمة التقييمات',
+    'rating' => 'التقييم',
+    'Ratings_List' => 'قائمة التقييمات',
+    'comment' => 'تعليق',
+    'user' => 'المستخدم',
+    'add_as_testimonial' => 'اضافة كرأي',
+    'already_added' => 'تمت اضافة التقييم كرأي مسبقا',
+    'Cannot add more than 7 active testimonials.' => 'لا يمكن إضافة أكثر من 7 اراء نشطة.',
+    'Deactive' => 'غير نشط',
+    'Active' => 'نشط',
+    'Activate' => 'تنشيط',
+    'Deactivate' => 'إلغاء التنشيط',
+    'The image size must not exceed 5 MB.' => 'يجب ألا يتجاوز حجم الصورة 5 ميجابايت.',
+    'Testimonial added successfully.' => 'تمت إضافة الرأي بنجاح.',
+    'Rating deleted successfully' => 'تم حذف التقييم بنجاح.',
+    'An error occurred while deleting the rating' => 'حدث خطأ أثناء حذف التقييم',
+
+];

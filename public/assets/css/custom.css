@@ -1,0 +1,62 @@
+
+.breadcrumb > .active {
+
+    color: #31A2E1
+}
+
+.language {
+    padding-top: 20px
+}
+
+.form-layout-footer {
+    padding-top: 50px;
+}
+
+body {
+    color: #73879C;
+    background: #f5f7f9;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471
+}
+
+footer {
+    color: #73879C;
+    background: #f5f7f9;
+}
+
+.profile_pic {
+    padding-left: 10px;
+}
+
+.nav-sm ul.nav.child_menu li a {
+    text-align: center !important;
+}
+
+.profile_info h2 {
+    font-size: 10px;
+    color: #ECF0F1;
+    margin: 0;
+    font-weight: 500;
+    padding: 5px;
+    padding-top: 20px;
+
+
+}
+.profile_pic img {
+    border-radius: 50%;
+    width: 70px !important;
+
+
+}
+
+.col-lg-4 {
+    width: 17.333333%;
+}
+.row {
+    margin-right: -10px;
+    margin-left: -10px;
+    padding-top: 8px;
+}
+

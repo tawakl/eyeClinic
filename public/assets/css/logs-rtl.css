@@ -1,0 +1,65 @@
+.custom-timeline li .date {
+    --dateH: 3rem;
+    height: var(--dateH);
+    margin-inline: calc(var(--inlineP) * -1);
+    text-align: center;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: grid;
+    place-content: center;
+    position: relative;
+    border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0; /* Reverse border-radius */
+}
+
+.custom-timeline li .date::before {
+    content: "";
+    width: var(--inlineP);
+    aspect-ratio: 1;
+    background: var(--accent-color);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2) 100%, transparent);
+    position: absolute;
+    top: 100%;
+    clip-path: polygon(100% 0, 0 0, 100% 100%); /* Reversed the polygon */
+    right: 406px; /* Adjust for better responsiveness */
+}
+
+.custom-timeline li .date::after {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    aspect-ratio: 1;
+    background: var(--bgColor);
+    border: 0.3rem solid var(--accent-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    right: -34px; /* Adjusts for mobile, using calc() */
+}
+
+@media (min-width: 40rem) {
+    .custom-timeline li:nth-child(odd) .date::before {
+        clip-path: polygon(100% 0, 0 0, 0 100%); /* Reverse the clip-path */
+        right: 0; /* Adjusted for larger screens */
+    }
+
+    .custom-timeline li:nth-child(odd) .date::after {
+        transform: translate(50%, -50%); /* Reverse the transform */
+        right: calc(100% + var(--col-gap) + var(--line-w) / 2); /* Keep this for larger screens */
+    }
+
+    .custom-timeline li:nth-child(odd) .date {
+        border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
+    }
+}
+
+@media (max-width: 40rem) {
+    .custom-timeline li .date::before {
+        right: calc(50% + var(--inlineP) / 2); /* Keep the position relative */
+    }
+
+    .custom-timeline li .date::after {
+        right: calc(50% - var(--line-w) / 2); /* Adjust for mobile */
+    }
+}
