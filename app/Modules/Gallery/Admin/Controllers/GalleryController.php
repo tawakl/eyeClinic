@@ -18,13 +18,13 @@ class GalleryController extends Controller
     public function __construct(GalleryRepository $galleryRepo)
     {
         $this->module = 'gallery';
-        $this->title = 'Gallery';
+        $this->title = trans('gallery.gallery');
         $this->galleryRepo = $galleryRepo;
     }
 
     public function index()
     {
-        $data['page_title'] = 'List ' . $this->title;
+        $data['page_title'] = trans('app.List') . ' ' . $this->title;
         $data['rows'] = $this->galleryRepo->all();
 
         return view('admin.' . $this->module . '.index', $data);
@@ -32,7 +32,7 @@ class GalleryController extends Controller
 
     public function create()
     {
-        $data['page_title'] = 'Add New Image';
+        $data['page_title'] = trans('gallery.add_image');
         $data['breadcrumb'] = [$this->title => route('admin.gallery.index')];
 
         return view('admin.' . $this->module . '.create', $data);
@@ -53,7 +53,7 @@ class GalleryController extends Controller
 
     public function edit(int $id)
     {
-        $data['page_title'] = 'Edit Image';
+        $data['page_title'] = trans('gallery.edit_image');
         $data['breadcrumb'] = [$this->title => route('admin.gallery.index')];
         $data['row'] = $this->galleryRepo->findOrFail($id);
 
@@ -72,7 +72,8 @@ class GalleryController extends Controller
 
         $this->galleryRepo->update($gallery, $data);
 
-        flash('Image updated successfully.')->success();
+        flash(trans('gallery.Image updated successfully.'))->success();
+
         return redirect()->route('admin.gallery.index');
     }
 
@@ -82,7 +83,8 @@ class GalleryController extends Controller
         Storage::disk('public')->delete($gallery->image);
         $this->galleryRepo->delete($gallery);
 
-        flash('Image deleted successfully.')->success();
+        flash(trans('gallery.Image deleted successfully.'))->success();
+
         return redirect()->route('admin.gallery.index');
     }
 }

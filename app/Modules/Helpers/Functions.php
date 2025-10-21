@@ -209,17 +209,6 @@ if (!function_exists('image')) {
         return getFileUrl($path, url("/assets/img/avatar.png"));
     }
 }
-if (!function_exists('randString')) {
-    function randString($length = 5)
-    {
-        $characters = 'abcdefghijklmnopqrstuvwxyz';
-        $randstring = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randstring .= $characters[rand(0, strlen($characters) - 1)];
-        }
-        return $randstring;
-    }
-}
 if (!function_exists('getImageTypes')) {
     function getImageTypes()
     {
@@ -232,111 +221,9 @@ if (!function_exists('getImageTypes')) {
         ];
     }
 }
-if (!function_exists('moveGarbageMediaImage')) {
-    function moveGarbageMediaSmallImage($garbageMedia, $imgName)
-    {
-        if (Storage::exists(S3Enums::GARBAGE_MEDIA_PATH . $garbageMedia->filename)) {
-            $imageSizes = [S3Enums::SMALL => 'resize,200x200'];
-            foreach ($imageSizes as $key => $value) {
-                $value = explode(',', $value);
-                $type = $value[0];
-                $dimensions = explode('x', $value[1]);
-                reSizeImage(
-                    S3Enums::GARBAGE_MEDIA_PATH . $garbageMedia->filename,
-                    $dimensions[0],
-                    $dimensions[1],
-                    $garbageMedia->extension,
-                    S3Enums::SMALL_PATH . $imgName,
-                    $type
-                );
-            }
-        }
-    }
-}
-if (!function_exists('moveGarbageMedia')) {
-    function moveGarbageMedia(
-        $ids,
-        \Illuminate\Database\Eloquent\Relations\HasOneOrMany $relation,
-        string $storagePath = null,
-        array $columnNamesMap = null,
-        $extraColumns = []
-    )
-    {
-        if (!is_array($ids)) {
-            $ids = [$ids];
-        }
 
-        if (!$columnNamesMap) {
-            $columnNamesMap = [
-                'source_filename' => 'source_filename',
-                'filename' => 'filename',
-                'extension' => 'extension',
-                'mime_type' => 'mime_type'
-            ];
-        }
-        $garbageMedias = GarbageMedia::find($ids);
-        foreach ($garbageMedias as $garbageMedia) {
-            if ($storagePath) {
-                $fileName = $storagePath . '/' . $garbageMedia->filename;
-            } else {
-                $fileName = $garbageMedia->filename;
-            }
 
-            $data = [
-                $columnNamesMap['filename'] => $fileName,
-                $columnNamesMap['source_filename'] => $garbageMedia->source_filename,
-                $columnNamesMap['extension'] => $garbageMedia->extension,
-                $columnNamesMap['mime_type'] => $garbageMedia->mime_type
-            ];
 
-            if (isset($extraColumns[$garbageMedia->id])) {
-                foreach ($extraColumns[$garbageMedia->id] as $key => $value) {
-                    $data[$key] = $value;
-                }
-            }
-
-            moveImagePath(
-                S3Enums::GARBAGE_MEDIA_PATH,
-                S3Enums::LARGE_PATH,
-                $storagePath,
-                $garbageMedia->filename
-            );
-            $relation->create($data);
-        }
-        GarbageMedia::whereIn('id', $ids)->delete();
-    }
-}
-if (!function_exists('deleteMedia')) {
-    function deleteMedia(
-        $ids,
-        object $model,
-        string $storagePath = null
-    )
-    {
-        if (!is_array($ids)) {
-            $ids = [$ids];
-        }
-
-        $mediaData = $model->whereIn('id', $ids)->get();
-
-        foreach ($mediaData as $media) {
-            if (in_array($media->extension, getImageTypes())) {
-                if (is_null($storagePath)) {
-                    deleteImagePath(S3Enums::LARGE_PATH . $media->filename);
-                    deleteImagePath(S3Enums::SMALL_PATH . $media->filename);
-                }
-                deleteImagePath(S3Enums::LARGE_PATH . $storagePath . '/' . $media->filename);
-                deleteImagePath(S3Enums::SMALL_PATH . $storagePath . '/' . $media->filename);
-            } else {
-                if (is_null($storagePath)) {
-                    deleteImagePath(S3Enums::LARGE_PATH . $media->filename);
-                }
-                deleteImagePath(S3Enums::LARGE_PATH . $storagePath . '/' . $media->filename);
-            }
-        }
-        $model->whereIn('id', $ids)->delete();
-    }
-}
 if (!function_exists('formatFiltersForApi')) {
     function formatFiltersForApi($filters)
     {
@@ -403,33 +290,6 @@ if (!function_exists('buildScopeRoute')) {
         return route($route, $params);
     }
 }
-if (!function_exists('moveSingleGarbageMedia')) {
-    function moveSingleGarbageMedia($id, string $storagePath = null)
-    {
-        $garbageMedia = GarbageMedia::find($id);
-        $fileName = null;
-        if ($garbageMedia) {
-            if ($storagePath) {
-                $fileName = $storagePath . '/' . $garbageMedia->filename;
-            } else {
-                $fileName = $garbageMedia->filename;
-            }
-            if (in_array($garbageMedia->extension, getImageTypes())) {
-                moveGarbageMediaSmallImage($garbageMedia, $fileName);
-            }
-            moveImagePath(
-                S3Enums::GARBAGE_MEDIA_PATH,
-                S3Enums::LARGE_PATH,
-                $storagePath,
-                $garbageMedia->filename
-            );
-        }
-        if ($garbageMedia) {
-            $garbageMedia->delete();
-        }
-        return $fileName;
-    }
-}
 if (!function_exists('checkLoginGuard')) {
     function checkLoginGuard()
     {
@@ -452,13 +312,6 @@ if (!function_exists('lang')) {
         return \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale();
     }
 }
-if (!function_exists('get_percentage')) {
-    function get_percentage($element, $total)
-    {
-        $percent = $element / $total;
-        return $percent * 100;
-    }
-}
 
 if (!function_exists('languages')) {
     function languages()
@@ -469,65 +322,6 @@ if (!function_exists('languages')) {
             $langs[$key] = $value['name'];
         }
         return $langs;
-    }
-}
-
-if (!function_exists('endOfDay')) {
-    function endOfDay($day)
-    {
-        return Carbon::createFromFormat('Y-m-d', $day)
-            ->endOfDay()
-            ->toDateTimeString();
-    }
-}
-
-if (!function_exists('startOfDay')) {
-    function startOfDay($day)
-    {
-        return Carbon::createFromFormat('Y-m-d', $day)
-            ->startOfDay()
-            ->toDateTimeString();
-    }
-}
-
-if (!function_exists('calculateProductPriceWithoutTaxes')) {
-    function calculateProductPriceWithoutTaxes($priceWithTaxes): float|int
-    {
-        $staticTaxValue = PaymentEnums::TAX;
-        /**
-         * price with taxes = price without taxes + (taxes * price without taxes)
-         * $priceWithTaxes = $unitPriceWithoutTax + (taxes * $unitPriceWithoutTax )
-         * $priceWithTaxes = (1+taxes )* $unitPriceWithoutTax
-         * $unitPriceWithoutTax = $priceWithTaxes / (1+taxes)
-         * $unitPriceWithoutTax = $priceWithTaxes / (1+($staticTaxValue/100))
-         **/
-
-        return $priceWithTaxes / (1 + ($staticTaxValue / 100));
-    }
-}
-
-if (!function_exists('getZIPOutput')) {
-    function getZIPOutput($path)
-    {
-        if (env('FILESYSTEM_DRIVER') == 's3') {
-            if (env('S3_BUCKET_PREFIX')) {
-                $path = env('S3_BUCKET_PREFIX') . '/' . $path;
-            }
-            return 's3://' . env('AWS_BUCKET') . '/' . $path;
-        } else {
-            return storage_path('app/public/' . $path);
-        }
-    }
-}
-
-if (!function_exists('getImageToMake')) {
-    function getImageToMake($path)
-    {
-        if (env('FILESYSTEM_DRIVER') == 's3') {
-            return getFileUrl($path);
-        } else {
-            return getFilePath($path);
-        }
     }
 }
 

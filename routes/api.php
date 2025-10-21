@@ -9,7 +9,7 @@ Route::group(
     ['as' => 'api.'],
     function () {
         require base_path('app/Modules/Users/Routes/api.php');
-        require base_path('app/Modules/Contact/Routes/api.php');
+        require base_path('app/Modules/LandingPage/Routes/api.php');
 
 
     }

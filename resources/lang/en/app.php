@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 return [
-    'app name' => 'starter',
+    'app name' => 'eyeClinic',
     'email' => 'Email',
     'password' => 'Password',
     'Login' => 'Login',

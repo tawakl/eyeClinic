@@ -22,17 +22,17 @@ class GalleryRepository
 
     public function all()
     {
-        return Gallery::latest()->get();
+        return $this->gallery->latest()->get();
     }
 
     public function findOrFail(int $id): Gallery
     {
-        return Gallery::findOrFail($id);
+        return $this->gallery->findOrFail($id);
     }
 
     public function create(array $data): Gallery
     {
-        return Gallery::create($data);
+        return $this->gallery->create($data);
     }
 
     public function update(Gallery $gallery, array $data): Gallery

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         dump('DatabaseSeeder is running...');
         $this->call(CreateSuperAdminAccount::class);
+        $this->call(ClinicWorkingDaysSeeder::class);
         dump('Seeding completed!');
     }
 }

@@ -25,6 +25,10 @@ Route::group(
                 require base_path('app/Modules/Dashboard/Admin/Routes/web.php');
                 require base_path('app/Modules/Users/Admin/Routes/web.php');
                 require base_path('app/Modules/Gallery/Admin/Routes/web.php');
+                require base_path('app/Modules/Booking/Admin/Routes/web.php');
+                require base_path('app/Modules/Config/Routes/web.php');
+                require base_path('app/Modules/Team/Admin/Routes/web.php');
+                require base_path('app/Modules/WorkingHours/Admin/Routes/web.php');
 
 //                require base_path('app/Modules/Contact/Admin/Routes/web.php');
 

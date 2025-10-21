@@ -14,8 +14,13 @@ class Gallery extends BaseModel
 
     protected $appends = ['image_url'];
 
-    public function getImageUrlAttribute()
+    public function getImageUrlAttribute(): string
     {
-        return asset('storage/' . $this->image);
+        if ($this->image && \Illuminate\Support\Facades\Storage::disk('public')->exists($this->image)) {
+            return asset('storage/' . $this->image);
+        }
+
+        return asset('assets/img/default-user.png');
     }
+
 }

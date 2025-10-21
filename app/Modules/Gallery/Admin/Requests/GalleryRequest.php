@@ -17,10 +17,18 @@ class GalleryRequest extends BaseAppRequest
      */
     public function rules(): array
     {
-        return [
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        $rules = [
             'caption' => 'nullable|string|max:255',
         ];
+
+        if ($this->isMethod('post')) {
+            $rules['image'] = 'required|image|mimes:jpg,jpeg,png,webp|max:2048';
+        } else {
+            $rules['image'] = 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048';
+        }
+
+        return $rules;
     }
+
 
 }

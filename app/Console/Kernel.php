@@ -28,11 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('sessions:alert')->dailyAt('00:00:00')->onOneServer();
-        $schedule->command('validate:promo-codes-status')->dailyAt('00:00:00')->onOneServer();
-        $schedule->command('execute:export-tasks')->everyMinute()->onOneServer();
-        $schedule->command('vcrSession:notify-session-time')->everyFifteenMinutes()->onOneServer();
-        $schedule->job(CleanNotificationJob::class)->dailyAt('00:00:00')->onOneServer();
+
     }
 
     /**

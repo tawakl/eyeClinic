@@ -42,25 +42,49 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $row->caption ?? '-' }}</p>
                                     </td>
 
-                                    <td class="align-middle text-center pt-5">
-                                        <div class="d-flex justify-content-center">
-                                            <a class="btn btn-xs btn-info me-2"
+                                    <td class="align-middle text-center">
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a class="btn btn-xs btn-info"
                                                href="{{ route('admin.gallery.edit', $row->id) }}"
-                                               data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                               data-bs-toggle="tooltip"
+                                               data-bs-placement="bottom"
                                                title="{{ trans('gallery.edit_image') }}">
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
-                                            <form method="POST" action="{{ route('admin.gallery.destroy', $row->id) }}"
-                                                  onsubmit="return confirm('{{ trans('gallery.confirm_delete') }}')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-xs btn-danger" type="submit"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="{{ trans('gallery.delete') }}">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            <a class="btn btn-xs btn-danger"
+                                               href="#"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#delete_image_{{$row->id}}"
+                                               title="{{ trans('app.delete') }}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+
+                                        <div class="modal fade" id="delete_image_{{$row->id}}" tabindex="-1"
+                                             role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body text-center">
+                                                        <form method="POST" action="{{ route('admin.gallery.destroy', $row->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <p class="mb-4">
+                                                                {{ trans('app.Are you sure you want to delete this item?') }}
+                                                            </p>
+                                                            <div class="d-flex justify-content-center gap-3">
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    {{ trans('app.confirm') }}
+                                                                </button>
+                                                                <button type="button" class="btn btn-danger"
+                                                                        data-bs-dismiss="modal">
+                                                                    {{ trans('app.cancel') }}
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
