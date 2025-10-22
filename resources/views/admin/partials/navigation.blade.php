@@ -5,7 +5,7 @@
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
            aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="" target="_blank">
-            <img src="/assets/img/pexels-pavel-danilyuk-5996746.jpg" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="/assets/img/9867833.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">{{ trans('app.app name') }} </span>
         </a>
     </div>
@@ -70,6 +70,19 @@
                     <span class="nav-link-text ms-1">
                         {{ trans('navigation.team') }}
                         @if(isset($teamCount)) <span class="badge bg-primary ms-2">{{ $teamCount }}</span> @endif
+                    </span>
+                </a>
+            </li>
+            {{-- Publication --}}
+            <li class="nav-item">
+                <a class="nav-link {{ getActiveElementByRoute(route:'admin.publication.index') }}"
+                   href="{{ route('admin.publication.index') }}">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-users text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">
+                        {{ trans('navigation.publications') }}
+                        @if(isset($publicationCount)) <span class="badge bg-primary ms-2">{{ $publicationCount }}</span> @endif
                     </span>
                 </a>
             </li>

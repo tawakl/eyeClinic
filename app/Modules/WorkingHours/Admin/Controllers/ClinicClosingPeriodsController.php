@@ -10,7 +10,7 @@ class ClinicClosingPeriodsController extends Controller
 {
     public function edit()
     {
-        $data['page_title'] = 'Clinic Closing Period';
+        $data['page_title'] = trans('clinic_working_days.Clinic Closing Period');
         $data['row'] = ClinicClosingPeriod::first();
         return view('admin.clinic_closing_periods.edit', $data);
     }
@@ -22,10 +22,9 @@ class ClinicClosingPeriodsController extends Controller
             'to_date'   => 'required|date|after_or_equal:from_date',
             'reason'    => 'nullable|string|max:255',
         ]);
-
         ClinicClosingPeriod::updateOrCreate(['id' => 1], $validated);
 
-        flash('Clinic closing period updated successfully.')->success();
+        flash(trans('clinic_working_days.Clinic closing period updated successfully.'))->success();
         return redirect()->route('admin.clinicClosingPeriods.edit');
     }
 }

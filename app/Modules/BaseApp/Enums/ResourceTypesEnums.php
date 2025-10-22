@@ -11,8 +11,9 @@ abstract class ResourceTypesEnums
         USER = 'user',
         RESET_PASSWORD = 'reset_password',
         ACTION = 'action',
-        LOOKUP = 'look_up',
         GALLERY = 'gallery',
+        PUBLICATION = 'publication',
+        TEAM_MEMBER = 'team_member',
         WORKING_HOURS = 'working_hours',
         CONFIG = 'config';
 }

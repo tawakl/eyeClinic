@@ -11,7 +11,7 @@
                         <div class="col-xl-6 col-lg-5 col-md-7 d-flex flex-column mx-auto">
                             @include('flash::message')
                             <div class="card card-plain">
-                                <img width="300" src="/assets/img/login1.png" class="m-auto">
+                                <img width="500" src="/assets/img/login4.png" class="m-auto">
                                 <div class="card-body">
                                     <form method="POST" action="{{ route('auth.post.login') }}">
                                         @csrf

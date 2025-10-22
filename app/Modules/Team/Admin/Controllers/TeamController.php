@@ -9,25 +9,28 @@ use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
 {
-    private string $module = 'team';
-    private string $title = 'Team Members';
-    private TeamRepository $teamRepo;
+    private  $module;
+    private  $title ;
+    private  $teamRepo;
 
     public function __construct(TeamRepository $teamRepo)
     {
+        $this->module = 'team';
         $this->teamRepo = $teamRepo;
+        $this->title = trans('team.Team_Members');
+
     }
 
     public function index()
     {
-        $data['page_title'] = 'List ' . $this->title;
+        $data['page_title'] = trans('team.List_team_members');
         $data['rows'] = $this->teamRepo->all();
         return view('admin.' . $this->module . '.index', $data);
     }
 
     public function create()
     {
-        $data['page_title'] = 'Add Team Member';
+        $data['page_title'] = trans('team.Add_Team_Member');
         return view('admin.' . $this->module . '.create', $data);
     }
 
@@ -42,14 +45,13 @@ class TeamController extends Controller
             'image' => $path,
             'is_active' => $request->boolean('is_active'),
         ]);
-
-        flash('Team member added successfully.')->success();
+        flash(trans('team.Team member added successfully.'))->success();
         return redirect()->route('admin.team.index');
     }
 
     public function edit(int $id)
     {
-        $data['page_title'] = 'Edit Team Member';
+        $data['page_title'] = trans('team.Edit_Team_Member');
         $data['row'] = $this->teamRepo->findOrFail($id);
         return view('admin.' . $this->module . '.edit', $data);
     }
@@ -63,9 +65,8 @@ class TeamController extends Controller
             Storage::disk('public')->delete($team->image);
             $data['image'] = $request->file('image')->store('team', 'public');
         }
-
         $this->teamRepo->update($team, $data);
-        flash('Team member updated successfully.')->success();
+        flash(trans('team.Team member updated successfully.'))->success();
         return redirect()->route('admin.team.index');
     }
 
@@ -74,8 +75,7 @@ class TeamController extends Controller
         $team = $this->teamRepo->findOrFail($id);
         Storage::disk('public')->delete($team->image);
         $this->teamRepo->delete($team);
-
-        flash('Team member deleted successfully.')->success();
+        flash(trans('team.Team member deleted successfully.'))->success();
         return redirect()->route('admin.team.index');
     }
 }

@@ -9,6 +9,7 @@ return [
     'team' => 'Team',
     'clinicWorkingDays' => 'Clinic Working Days',
     'clinicClosingPeriods' => 'Clinic Closing Periods',
+    'publications' => 'Publications',
 
 
 ];

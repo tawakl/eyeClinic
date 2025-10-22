@@ -26,6 +26,11 @@ return [
     'friday'    => 'Friday',
     'saturday'  => 'Saturday',
     'sunday'    => 'Sunday',
+    'Clinic Closing Period' => 'Clinic Closing Period',
+    'Clinic working days updated successfully.' => 'Clinic working days updated successfully.',
+    'Clinic closing period updated successfully.' => 'Clinic closing period updated successfully.',
+    'Clinic Working Days' => 'Clinic Working Days',
+
 
 
 

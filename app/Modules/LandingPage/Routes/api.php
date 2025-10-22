@@ -15,6 +15,7 @@ Route::group(
         Route::post('booking', [LandingPageController::class, 'storeBooking'])->name('landingPage.booking.store');
         Route::get('working-hours', [LandingPageController::class, 'workingHours'])->name('landingPage.workingHours');
         Route::get('available-slots-for-day', [LandingPageController::class, 'availableSlotsForDay']);
+        Route::get('publications', [LandingPageController::class, 'publications'])->name('landingPage.publications');
 
 
 

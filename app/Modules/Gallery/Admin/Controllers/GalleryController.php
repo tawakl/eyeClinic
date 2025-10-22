@@ -47,7 +47,8 @@ class GalleryController extends Controller
             'caption' => $request->caption,
         ]);
 
-        flash('Image added successfully.')->success();
+        flash(trans('gallery.Image added successfully.'))->success();
+
         return redirect()->route('admin.gallery.index');
     }
 

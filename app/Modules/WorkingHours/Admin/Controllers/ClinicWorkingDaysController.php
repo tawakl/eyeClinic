@@ -18,7 +18,7 @@ class ClinicWorkingDaysController extends Controller
 
     public function index()
     {
-        $data['page_title'] = 'Clinic Working Days';
+        $data['page_title'] = trans('clinic_working_days.Clinic Working Days');
         $data['rows'] = $this->repo->all();
         return view('admin.clinic_working_days.edit', $data);
     }
@@ -42,7 +42,7 @@ class ClinicWorkingDaysController extends Controller
             );
         }
 
-        flash('Working days updated successfully.')->success();
+        flash(trans('clinic_working_days.Working days updated successfully.'))->success();
         return redirect()->back();
     }
 

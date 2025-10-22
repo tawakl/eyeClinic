@@ -29,6 +29,7 @@ Route::group(
                 require base_path('app/Modules/Config/Routes/web.php');
                 require base_path('app/Modules/Team/Admin/Routes/web.php');
                 require base_path('app/Modules/WorkingHours/Admin/Routes/web.php');
+                require base_path('app/Modules/Publications/Admin/Routes/web.php');
 
 //                require base_path('app/Modules/Contact/Admin/Routes/web.php');
 

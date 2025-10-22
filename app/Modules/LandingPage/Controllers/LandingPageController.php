@@ -9,12 +9,12 @@ use App\Modules\Booking\Repository\BookingRepository;
 use App\Modules\Booking\Requests\BookingRequest;
 use App\Modules\Config\Config;
 use App\Modules\Gallery\Repository\GalleryRepository;
-use App\Modules\LandingPage\Transformers\{
-    ConfigsTransformer,
+use App\Modules\Publications\Repository\PublicationRepository;
+use App\Modules\LandingPage\Transformers\{ConfigsTransformer,
     GalleryTransformer,
+    PublicationTransformer,
     TeamTransformer,
-    WorkingHoursTransformer
-};
+    WorkingHoursTransformer};
 use App\Modules\Team\Repository\TeamRepository;
 use App\Modules\WorkingHours\ClinicClosingPeriod;
 use App\Modules\WorkingHours\Repository\ClinicWorkingDayRepository;
@@ -47,7 +47,7 @@ class LandingPageController extends BaseApiController
     public function team()
     {
         $teamMembers = (new TeamRepository())->all();
-        return $this->transformDataModInclude($teamMembers, '', new TeamTransformer(), ResourceTypesEnums::TEAM);
+        return $this->transformDataModInclude($teamMembers, '', new TeamTransformer(), ResourceTypesEnums::TEAM_MEMBER);
     }
 
     /**
@@ -178,5 +178,12 @@ class LandingPageController extends BaseApiController
             ResourceTypesEnums::WORKING_HOURS,
             ['message' => 'Available slots retrieved successfully.']
         );
+    }
+
+    public function publications()
+    {
+        $publication = (new PublicationRepository())->all();
+        return $this->transformDataModInclude($publication, '', new PublicationTransformer(), ResourceTypesEnums::PUBLICATION);
+
     }
 }

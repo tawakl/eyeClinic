@@ -15,6 +15,8 @@ return [
     'deleted_successfully' => 'Image deleted successfully',
     'Image deleted successfully.' => 'Image deleted successfully.',
     'Image updated successfully.' => 'Image updated successfully.',
+    'Image added successfully.' => 'Image added successfully.',
+    'edit' => 'Edit',
     'delete' => 'Delete',
 
 ];
